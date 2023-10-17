@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import { userM } from "@/lib/mongooseFile";
-
+import userM from "@/lib/mongooseFile";
+import initiateConnection from "@/lib/initiateConnection";
 interface User{
     username : string;
     password: string;
@@ -16,8 +16,9 @@ const handler = async (req: NextApiRequest,
             const userObject: User = req.body;
             console.log(req.body);
             if(userObject && userObject.username && userObject.password){
-                const userFound = await userM.findOne({username : userObject.username});
-                if(userFound && userFound.password ==  userObject.username && userFound._id){
+                await initiateConnection();
+                const userFound = await userM.findOne({username :userObject.username});
+                if(userFound && userFound.password ==  userObject.password && userFound._id){
                    return  res.status(200).send({ message : 'Loged In', id : userFound?._id.toString()});
                 }
             }
