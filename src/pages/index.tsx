@@ -11,7 +11,7 @@ export default function Home() {
     <div>
       <Appbar />
       <Grid container spacing={2}>
-        <Grid sm={6} m={6} xl={4}>
+        <Grid item sm={6} m={6} xl={4}>
           <div style={{display:'flex', flexDirection:'column'}}>
             <Typography variant='h6'>
               CourSell
@@ -25,7 +25,7 @@ export default function Home() {
             </div>
           </div>
         </Grid>
-        <Grid sm={6} m={6} xl={8}>
+        <Grid item sm={6} m={6} xl={8}>
           <img src = "https://static.wixstatic.com/media/65246d_c7bd3ba476fb4191af59a11494ad027f~mv2.jpg/v1/fill/w_820,h_460,al_c,q_85/65246d_c7bd3ba476fb4191af59a11494ad027f~mv2.jpg" 
           height='250' width= '300'/>
         </Grid>

@@ -10,11 +10,11 @@ type ReturnObject = {
     message : string;
     id : string
 }
-export const handler = async (req: NextApiRequest,
+const handler = async (req: NextApiRequest,
     res: NextApiResponse<ReturnObject | null>) => {
         if(req.method == "POST"){
             const userObject: User = req.body;
-            
+            console.log(req.body);
             if(userObject && userObject.username && userObject.password){
                 const userFound = await userM.findOne({username : userObject.username});
                 if(userFound && userFound.password ==  userObject.username && userFound._id){
@@ -27,3 +27,4 @@ export const handler = async (req: NextApiRequest,
 
 
 }
+export default handler;

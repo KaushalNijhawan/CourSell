@@ -17,6 +17,7 @@ const courseSchema = new mongoose.Schema({
     published : Boolean
 });
 
-export const userM = mongoose.model('users' , userSchema);
+export const userM = mongoose.models.users || mongoose.model('users' , userSchema);
+//  a small fix where it will return the already compiled mongoose models to the endUser rather than recompiling them
 
-export const courseM = mongoose.model('courses', courseSchema);
+export const courseM = mongoose.models.courses || mongoose.model('courses', courseSchema);

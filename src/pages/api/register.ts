@@ -9,7 +9,7 @@ type ReturnOject = {
     _id: string;
     message: string;
 }
-export const register = async (req: NextApiRequest,
+const register = async (req: NextApiRequest,
     res: NextApiResponse<ReturnOject | null>) => {
     if (req.method == "POST") {
         const userObject: User = req.body;
@@ -23,3 +23,4 @@ export const register = async (req: NextApiRequest,
         return res.status(401).send(null);
     }
 }
+export default register;
