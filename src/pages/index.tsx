@@ -4,9 +4,12 @@ import { Inter } from 'next/font/google'
 import styles from '@/styles/Home.module.css'
 import Appbar from '@/components/Appbar'
 import { Grid, Typography, Button } from '@mui/material'
+import { cookies } from 'next/headers'
 const inter = Inter({ subsets: ['latin'] })
 
 export default function Home() {
+
+  console.log(cookies().get('token'));
   return (
     <div>
       <Appbar />
