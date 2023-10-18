@@ -4,12 +4,11 @@ import { Inter } from 'next/font/google'
 import styles from '@/styles/Home.module.css'
 import Appbar from '@/components/Appbar'
 import { Grid, Typography, Button } from '@mui/material'
-import { cookies } from 'next/headers'
+import {useRouter } from 'next/router'
 const inter = Inter({ subsets: ['latin'] })
 
 export default function Home() {
-
-  console.log(cookies().get('token'));
+  const router = useRouter();
   return (
     <div>
       <Appbar />
@@ -23,8 +22,8 @@ export default function Home() {
               A place to learn , Chance to grow
             </p>
             <div>
-              <Button variant='outlined' >Login</Button>
-              <Button variant='outlined' style={{marginLeft:'10px'}}>SignIn</Button>
+              <Button variant='outlined' onClick={ () => router.push('/login') }>Login</Button>
+              <Button variant='outlined' style={{marginLeft:'10px'}} onClick={() => router.push('/signup')}>SigUp</Button>
             </div>
           </div>
         </Grid>
