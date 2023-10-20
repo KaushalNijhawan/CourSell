@@ -1,30 +1,31 @@
 import { NextRequest, NextResponse } from 'next/server';
-import userM  from './lib/mongooseFile';
-import  initiateConnection from './lib/initiateConnection';
+import { tokenVerify } from './lib/tokenGenerator';
+import cookie from 'cookie';
+import { NextApiResponse } from 'next';
+export const middleware = async (req: NextRequest, res: NextApiResponse) => {
+    if(!req.url.includes('/api/login') && !req.url.includes('/api/register')){
+        const token  = req.cookies.get('auth') &&  req.cookies.get('auth')?.value ? req.cookies.get('auth')?.value : "";
+        let response = await tokenVerify(token);
+        console.log(response);
+        if(response){
+            return NextResponse.next();
+        }else{
+            const cookieObj = cookie.serialize('auth' , '', {
+                maxAge:3600,
+                path:'/',
+                httpOnly: true,
+                sameSite : 'strict'
+            });
+            
+            return NextResponse.json({message : 'Invalid User!'},{status: 401});
+        }
+    }
 
-export const middleware = async (req: NextRequest) => {
-    // if (req.url.includes('/api/register')) {
-    //     await initiateConnection();
-    //     let userBody = JSON.parse(await req.text());
-    //     console.log(userBody.username);
-    //     if (userBody && userBody.username && userBody.password) {
-    //         try{
-    //             let userObj = await userM.findOne({username : userBody.username, password: userBody.password});
-    //             if (userObj && userObj.username && userObj.password) {
-    //                 return NextResponse.json({ message: 'User Already Present' });
-    //             }
-    //         }catch(err){
-    //             console.log(err);
-    //         }
-    //     }
-    // }
-    //  this is the way to extract the body from the request object.
 
 
 
-    return NextResponse.next();
 }
 
 export const config = {
-    matcher: ['/api/login', '/api/register']
+    matcher: ['/api/:path*']
 }

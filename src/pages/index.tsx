@@ -2,6 +2,7 @@ import Head from 'next/head'
 import Image from 'next/image'
 import { Inter } from 'next/font/google'
 import styles from '@/styles/Home.module.css'
+import axios from 'axios';
 import Appbar from '@/components/Appbar'
 import { Grid, Typography, Button } from '@mui/material'
 import {useRouter } from 'next/router'
@@ -35,3 +36,4 @@ export default function Home() {
     </div>
   )
 }
+

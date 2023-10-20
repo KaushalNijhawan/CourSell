@@ -1,21 +1,41 @@
-import jwt from "jsonwebtoken";
+// import jose from 'jose';
 
-const SECRET_TEXT = "this is my text this is my text this is my text";
+import { SignJWT, jwtVerify } from "jose";
 
-export const tokenGenerator = (username : string) =>{
-    let token = jwt.sign({
-        data: username
-      }, SECRET_TEXT, { expiresIn: 60 * 60 });
-    return token;     
+const secret = new TextEncoder().encode(
+    'cc7e0d44fd473002f1c42167459001140ec6389b7353f8088f4d9a95f2f596f2',
+)
+const alg = 'HS256'
+
+
+
+export const tokenGenerator = async (username: string) => {
+    const jwt = await new SignJWT({ 'urn:example:claim': true })
+        .setProtectedHeader({ alg })
+        .setIssuedAt()
+        .setIssuer('urn:example:issuer')
+        .setAudience('urn:example:audience')
+        .setExpirationTime('2h').setSubject(username)
+        .sign(secret);;
+    return jwt;
 }
 
-export const tokenVerify = (token : string) =>{
-    try{
-        jwt.verify(token , SECRET_TEXT);
-        return true;
-    }catch(err){
-        console.log(err);
+export const tokenVerify = async (jwt: string | undefined) => {
+    if (jwt) {
+        try {
+            const { payload, protectedHeader } = await jwtVerify(jwt, secret, {
+                issuer: 'urn:example:issuer',
+                audience: 'urn:example:audience',
+            });
+            console.log(payload.sub);
+            return true;
+        } catch (err) {
+            console.log(err);
+        }
+
     }
+
+
 
     return false;
 }

@@ -2,8 +2,9 @@ import Appbar from "@/components/Appbar";
 import { Button, Card, TextField, Typography } from "@mui/material";
 import {useState} from 'react';
 import axios from "axios";
+import { useRouter } from "next/router";
 const Login = () => {
-
+    const router = useRouter();
     const [username, setUsername] = useState<String>('');
     const [password, setPassword] = useState<String>('');
 
@@ -20,6 +21,7 @@ const Login = () => {
                     }
                 });
                 console.log(response.data);
+                router.push('/courses');
             }catch(err){
                 console.log(err);
             }
@@ -38,7 +40,7 @@ const Login = () => {
                 <TextField id="outlined-basic" label="password" variant="outlined" style={{width:250, marginTop:10}} onChange={(e) => setPassword(e.target.value)}
                 type="password"/>
                 <div style={{ display: 'flex' , justifyContent:'space-between', marginTop:10}}>
-                    <Button variant='outlined'>Login</Button>
+                    <Button variant='outlined' onClick= {handleLogin}>Login</Button>
                     <Button variant='outlined' style={{marginLeft:10}}>Register</Button>
                 </div>
             </Card>
