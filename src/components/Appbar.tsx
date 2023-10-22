@@ -59,8 +59,8 @@ const Appbar = () => {
 
                     </div>
                     : <div style={{ display: 'flex' }}>
-                        <Button variant="outlined" style={{ marginLeft: '5px' }} onClick={handleLogout}>Add Courses</Button>
-                        <Button variant="outlined" style={{ marginLeft: '5px' }} onClick={handleLogout}>Courses</Button>
+                        <Button variant="outlined" style={{ marginLeft: '5px' }} onClick={() =>  router.push('/addCourses')}>Add Courses</Button>
+                        <Button variant="outlined" style={{ marginLeft: '5px' }} onClick={() => router.push('/courses')}>Courses</Button>
                         <Button variant="outlined" style={{ marginLeft: '5px' }} onClick={handleLogout}>Logout</Button>
 
                     </div> :
