@@ -2,6 +2,7 @@ import { useEffect , useState} from "react";
 import axios from 'axios';
 import {useSetRecoilState} from "recoil";
 import { useRouter } from "next/router";
+import Appbar from "@/components/Appbar";
 const Courses = () =>{
     const router = useRouter();
     const [isLoading , setLoading] = useState<boolean>(false);
@@ -16,7 +17,6 @@ const Courses = () =>{
             setLoading(false);
         }).catch((err)=>{
             setLoading(false);
-            router.push('/');            
             console.log(err);
         });
     },[]);
@@ -26,6 +26,7 @@ const Courses = () =>{
     }
     return(
         <div>
+            <Appbar/>
 
         </div>
     );

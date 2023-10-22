@@ -3,7 +3,8 @@ import { tokenVerify } from './lib/tokenGenerator';
 import cookie from 'cookie';
 import { NextApiResponse } from 'next';
 export const middleware = async (req: NextRequest, res: NextApiResponse) => {
-    if(!req.url.includes('/api/login') && !req.url.includes('/api/register')){
+    if(!req.url.includes('/api/login') && !req.url.includes('/api/register') && !req.url.includes('/api/logout')
+    && !req.url.includes('/api/courses')){
         const token  = req.cookies.get('auth') &&  req.cookies.get('auth')?.value ? req.cookies.get('auth')?.value : "";
         let response = await tokenVerify(token);
         console.log(response);

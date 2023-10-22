@@ -30,7 +30,6 @@ const Login = () => {
     }
     return (
         <div>
-        <Appbar />
         <div style={{height:'90vh', width:'90vw', display:'flex', justifyContent:'center', alignItems:'center'}}>
                 <Card style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', height: 300, width: 400 }}>
                 <Typography variant="h6">
