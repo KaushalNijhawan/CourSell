@@ -71,16 +71,25 @@ const AddCourses = (props: { courses: [] }) => {
 export default AddCourses;
 
 export const getServerSideProps = async () => {
-    const res = await axios.get('http://localhost:3000/api/courses', {
-        headers: {
-            "Content-Type": 'application/json'
-        }
-    });
-    if (res && res.data) {
-        console.log(res.data);
+    try {
+        const res = await axios.get('http://localhost:3000/api/courses', {
+            headers: {
+                "Content-Type": 'application/json'
+            }
+        });
+        if (res && res.data) {
+            console.log(res.data);
 
-        return {
-            props: { courses: res.data }
-        };
+            return {
+                props: { courses: res.data }
+            };
+        }
+    } catch (err) {
+        console.log(err);
     }
+
+    return {
+        props:{courses: []}
+    };
+
 }

@@ -27,10 +27,9 @@ export const tokenVerify = async (jwt: string | undefined) => {
                 issuer: 'urn:example:issuer',
                 audience: 'urn:example:audience',
             });
-            console.log(payload.sub);
             return true;
         } catch (err) {
-            console.log(err);
+            // console.log(err);
         }
 
     }

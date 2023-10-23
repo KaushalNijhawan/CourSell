@@ -27,7 +27,6 @@ const register = async (req: NextApiRequest,
                 }
                 let userSaved = new userM({ username: userObject.username, password: userObject.password });
                 let savedObject = await userSaved.save();
-                console.log(savedObject);
                 return res.status(200).send({ _id: savedObject._id.toString(), message: 'Saved Object' });
             }catch(err){
                 console.log(err);

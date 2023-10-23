@@ -1,29 +1,30 @@
 import { CardMedia , CardContent, Typography, CardActions, Button, Card } from "@mui/material";
 
 const CourseCard = (props : any) => {
+
     return (
-        <>
+        <div style={{marginLeft:10, marginTop:10}}>
         <Card sx={{ maxWidth: 345 }}>
             <CardMedia
                 sx={{ height: 140 }}
-                image="/static/images/cards/contemplative-reptile.jpg"
-                title="green iguana"
+                image={props.course.imageLink}
             />
             <CardContent>
                 <Typography gutterBottom variant="h5" component="div">
-                    Lizard
+                    {props.course.title}
                 </Typography>
                 <Typography variant="body2" color="text.secondary">
-                    Lizards are a widespread group of squamate reptiles, with over 6,000
-                    species, ranging across all continents except Antarctica
+                    {props.course.description}
                 </Typography>
+                <div style={{display:'flex', justifyContent:'space-between'}}>
+                    <div><p>Price: </p></div> <div><p>{props.course.price}</p></div>
+                </div>
             </CardContent>
             <CardActions>
-                <Button size="small">Share</Button>
-                <Button size="small">Learn More</Button>
+                <Button size="small">View & Edit</Button>
             </CardActions>
             </Card>
-        </>
+        </div>
     )
 }
 
