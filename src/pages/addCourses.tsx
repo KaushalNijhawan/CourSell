@@ -1,7 +1,7 @@
 import { courseAtom } from "@/atoms/CourseAtom";
 import Appbar from "@/components/Appbar";
 import { Button, Card, TextField, Typography } from "@mui/material";
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { useSetRecoilState } from "recoil";
 import axios from "axios";
 type course = {
@@ -18,10 +18,15 @@ const AddCourses = (props: { courses: [] }) => {
     const [price, setPrice] = useState('');
     const [description, setDescription] = useState('');
     const [imageLink, setImageLink] = useState('');
+    const priceRef = useRef<any>('');
+    const descRef = useRef<any>('');
+    const imageRef = useRef<any>('');
+    const titleRef = useRef<any>('');
     const [currentCourses, setCurrentCourses] = useState<course[]>(props.courses);
     const addCourse = useSetRecoilState(courseAtom);
 
-    const handleAddCourses = async () => {
+    const handleAddCourses = async (e : any) => {
+        e.preventDefault();
         if (title && price && description) {
             const courseObject = {
                 title: title,
@@ -37,7 +42,11 @@ const AddCourses = (props: { courses: [] }) => {
                     }
                 });
 
-                if (response && response.data) {
+                if(imageRef  && priceRef && titleRef && descRef){
+                    imageRef.current = '';
+                    titleRef.current = '';
+                    priceRef.current = '';
+                    descRef.current = '';
 
                 }
             } catch (err) {
@@ -54,13 +63,14 @@ const AddCourses = (props: { courses: [] }) => {
                     <Typography variant="h6">
                         CourSell Login!
                     </Typography>
-                    <TextField id="outlined-basic" label="Title" variant="outlined" style={{ width: 250 }} onChange={(e) => setTitle(e.target.value)} />
+                    <TextField id="outlined-basic" label="Title" variant="outlined" style={{ width: 250 }} onChange={(e) => setTitle(e.target.value)} ref={titleRef} />
                     <TextField id="outlined-basic" label="Description" variant="outlined" style={{ width: 250, marginTop: 10 }}
-                        type="text" onChange={(e) => setDescription(e.target.value)} />
-                    <TextField id="outlined-basic" label="Price" variant="outlined" style={{ width: 250, marginTop: 10 }} onChange={(e) => setPrice(e.target.value)} />
+                        type="text" onChange={(e) => setDescription(e.target.value)} ref={descRef} />
+                    <TextField id="outlined-basic" label="Price" variant="outlined" style={{ width: 250, marginTop: 10 }} onChange={(e) => setPrice(e.target.value)}
+                        ref={priceRef} />
                     <TextField id="outlined-basic" label="Image" variant="outlined" style={{ width: 250, marginTop: 10 }} onChange={(e) => setImageLink(e.target.value)} />
-                    <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: 10 }}>
-                        <Button variant='outlined' style={{ marginLeft: 10 }} color='success' onClick={handleAddCourses}>Add Course</Button>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: 10 }} ref={imageRef}>
+                        <Button variant='outlined' style={{ marginLeft: 10 }} color='success' onClick={(e) => handleAddCourses(e)}>Add Course</Button>
                     </div>
                 </Card>
             </div>
@@ -89,7 +99,7 @@ export const getServerSideProps = async () => {
     }
 
     return {
-        props:{courses: []}
+        props: { courses: [] }
     };
 
 }

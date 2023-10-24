@@ -1,7 +1,8 @@
 import { CardMedia , CardContent, Typography, CardActions, Button, Card } from "@mui/material";
+import { Router, useRouter } from "next/router";
 
 const CourseCard = (props : any) => {
-
+    const router = useRouter();
     return (
         <div style={{marginLeft:10, marginTop:10}}>
         <Card sx={{ maxWidth: 345 }}>
@@ -21,9 +22,9 @@ const CourseCard = (props : any) => {
                 </div>
             </CardContent>
             <CardActions>
-                <Button size="small">View & Edit</Button>
+                <Button size="small" onClick={() =>  router.push(`/courses/${props.course._id}`)}>View & Edit</Button>
             </CardActions>
-            </Card>
+        </Card>
         </div>
     )
 }
