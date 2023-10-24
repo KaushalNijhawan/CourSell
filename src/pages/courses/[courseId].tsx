@@ -56,7 +56,6 @@ const UpdateCourse = (props: any) => {
                     "Content-Type":'application/json'
                 }
             });
-            console.log(res.data);
         }catch(err){
             console.log(err);
         }
